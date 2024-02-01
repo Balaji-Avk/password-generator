@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useRef} from 'react'
 import './App.css'
 
 function App() {
@@ -6,7 +6,12 @@ function App() {
   const [numberAllowed,setNumberAllowed]=useState(false);
   const [charAllowed,setCharAllowed]=useState(false);
   const [password,setPassword]=useState("");
+  const passwordRef=useRef(null)
 
+  const copyPassword=useCallback(()=>{
+      passwordRef.current?.select();
+      window.navigator.clipboard.writeText(password);
+  },[password])
   const passwordGenerator=useCallback(()=>{
     let pass=""
     let str="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -22,29 +27,30 @@ function App() {
   useEffect(()=>{passwordGenerator()},[length,numberAllowed,charAllowed])
   return (
     <>
-    <div>
-      <h1 className='head-txt'>Password Generator</h1>
-      <div>
-        <input type="text" value={password} className="Password-field" readOnly></input>
-        <button>copy</button>
-      </div>
-    </div>
-
-    <div>
-      <div>
-        <div>
-          <input type="range" min={8} max={18} value={length} onChange={(e)=>{setLength(e.target.value)}} ></input>
-          <label>Length : {length}</label>
-        </div>
-        <div>
-          <input type="checkbox" defaultChecked={numberAllowed} id="numberInput" onChange={()=>{setNumberAllowed((prev)=>!prev)}} />
-          <label htmlFor="numberInput">Number</label>
-        </div>
-        <div>
-          <input type="checkbox" defaultChecked={charAllowed} id="charInput" onChange={()=>{setCharAllowed((prev)=>!prev)}} />
-          <label htmlFor="charInput">Character</label>
+    <div className='wrapper'>
+      <div className="wrapper-flex">
+      <div className='head-txt'>
+        <h1 >Password Generator</h1>
+        <div className="pass-div">
+          <input type="text" value={password} className="Password-field" readOnly ref={passwordRef}></input>
+          <button onClick={copyPassword}>copy</button>
         </div>
       </div>
+        <div className="settings-div">
+          <div className="settings-sub-div">
+            <input type="range" min={8} max={18} value={length} onChange={(e)=>{setLength(e.target.value)}} ></input>
+            <label> Length : {length}</label>
+          </div>
+          <div className="settings-sub-div">
+            <input type="checkbox" defaultChecked={numberAllowed} id="numberInput" onChange={()=>{setNumberAllowed((prev)=>!prev)}} />
+            <label htmlFor="numberInput">Number</label>
+          </div>
+          <div className="settings-sub-div">
+            <input type="checkbox" defaultChecked={charAllowed} id="charInput" onChange={()=>{setCharAllowed((prev)=>!prev)}} />
+            <label htmlFor="charInput">Character</label>
+          </div>
+        </div>
+        </div>
     </div>
 
     </>

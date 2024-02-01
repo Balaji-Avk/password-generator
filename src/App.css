@@ -1,0 +1,50 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.wrapper-flex{
+    background-color: #b9d4f1;
+    width: 35%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 50px;
+
+}
+.wrapper-flex h1{
+    text-align: center;
+}
+.wrapper-flex .pass-div {
+    display: flex;
+    justify-content: center;
+}
+.wrapper-flex .pass-div input,button{
+    text-align: center;
+    background-color: #ddedff;
+    border-radius: 13px;
+    border: 0px;
+}
+.wrapper-flex .pass-div input{
+    height:20px;
+    width: 200px;
+    border-top-right-radius:0px ;
+    border-bottom-right-radius:0px ;
+}
+.wrapper-flex .pass-div button{
+    border-left: 2px solid rgb(185, 185, 185);
+    border-top-left-radius:0px ;
+    border-bottom-left-radius:0px ;
+}
+.wrapper-flex .settings-div{
+    margin-top: 15px;
+    padding:5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.settings-div .settings-sub-div{
+    display: flex;
+}
